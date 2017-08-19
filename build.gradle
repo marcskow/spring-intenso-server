@@ -1,0 +1,31 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+group 'com.marcskow.springserver'
+version '0.1'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.projectlombok:lombok:1.16.8'
+    compile 'ch.qos.logback:logback-classic:1.1.6'
+    compile 'org.slf4j:slf4j-api:1.7.18'
+    compile 'org.springframework.boot:spring-boot-starter-data-rest'
+    compile 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
