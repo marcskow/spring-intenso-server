@@ -1,7 +1,8 @@
 package com.marcskow.springserver.controllers;
 
-import com.marcskow.springserver.model.Note;
-import com.marcskow.springserver.repositories.NoteRepository;
+
+import com.marcskow.springserver.model.UserModel;
+import com.marcskow.springserver.repositories.UserModelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,34 +13,34 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/note")
-public class NoteController {
+@RequestMapping("/api/user")
+public class UserController {
 
     @Autowired
-    private NoteRepository noteRepository;
+    private UserModelRepository userModelRepository;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Note>> getNote(){
-        List<Note> note = noteRepository.findAll();
-        if(note.isEmpty()) {
+    public ResponseEntity<List<UserModel>> getUserModel(){
+        List<UserModel> userModel = userModelRepository.findAll();
+        if(userModel.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            return new ResponseEntity<>(note, HttpStatus.OK);
+            return new ResponseEntity<>(userModel, HttpStatus.OK);
         }
     }
 
-    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Note> getNoteById(@PathVariable("id") String id){
-        Optional<Note> note = noteRepository.findOneById(id);
-        return note.map(note1 -> new ResponseEntity<>(note1, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    @RequestMapping(path = "/{username}", method = RequestMethod.GET)
+    public ResponseEntity<UserModel> getUserModelByUserName(@PathVariable("username") String username){
+        Optional<UserModel> userModel = userModelRepository.findOneByUsername(username);
+        return userModel.map(userModel1 -> new ResponseEntity<>(userModel1, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> addNote(@RequestBody Note note, Errors errors){
+    public ResponseEntity<?> addUserModel(@RequestBody UserModel userModel, Errors errors){
         if(errors.hasErrors()){
             return new ResponseEntity<>(new Error(errors.toString()),HttpStatus.BAD_REQUEST);
         }
-        Note result = noteRepository.save(note);
+        UserModel result = userModelRepository.save(userModel);
         if(result != null){
             return new ResponseEntity<>(result, HttpStatus.CREATED);
         } else {
@@ -48,11 +49,11 @@ public class NoteController {
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<?> updateNote(@RequestBody Note note, Errors errors){
+    public ResponseEntity<?> updateUserModel(@RequestBody UserModel userModel, Errors errors){
         if(errors.hasErrors()){
             return new ResponseEntity<>(new Error(errors.toString()),HttpStatus.BAD_REQUEST);
         }
-        Note result = noteRepository.insert(note);
+        UserModel result = userModelRepository.insert(userModel);
         if(result != null){
             return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
@@ -62,9 +63,9 @@ public class NoteController {
 
 
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteNote(@PathVariable("id") String id) {
-        if(noteRepository.findOneById(id) != null) {
-            noteRepository.delete(id);
+    public ResponseEntity<?> deleteUserModel(@PathVariable("id") String id) {
+        if(userModelRepository.findOneById(id) != null) {
+            userModelRepository.delete(id);
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
