@@ -11,3 +11,5 @@ another server just to train, and also apply here as much interesting stuff as I
 0.2.0 Forward REST request to another server to get data.
 
 0.3.0 Authentication. In 0.3 just basic authentication
+
+0.3.1 Authentication. Add rules and fix some problems.

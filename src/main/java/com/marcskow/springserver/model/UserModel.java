@@ -1,5 +1,6 @@
 package com.marcskow.springserver.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
@@ -42,7 +43,7 @@ public class UserModel {
     @NotEmpty
     private String email;
 
-    @JsonProperty(access = Access.WRITE_ONLY)
+    @JsonIgnore
     private List<String> privilages;
 
     public String getId() {

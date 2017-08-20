@@ -26,13 +26,13 @@ public class BasicSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/ping").permitAll()
-                .antMatchers("/sing-up").permitAll()
-                .antMatchers("/sing-in").permitAll()
-                .antMatchers("/api/**").authenticated()
-                .anyRequest().authenticated()
-                .and().httpBasic();
+        http.authorizeRequests()
+                .antMatchers("/sing-up", "/ping", "/sing-in")
+                .permitAll()
+                .antMatchers("/api/**")
+                .authenticated()
+                .and()
+                .csrf().disable()
+                .httpBasic();
     }
 }
