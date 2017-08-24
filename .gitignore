@@ -103,3 +103,9 @@ gradle-app.setting
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
+
+intenso2.jks
+OAuth2SecurityConfiguration.java
+AuthenticationSecurity.java
+mocked*
+application.properties

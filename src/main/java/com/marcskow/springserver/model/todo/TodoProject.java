@@ -1,23 +1,30 @@
 package com.marcskow.springserver.model.todo;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 import static com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Getter
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TodoList {
+public class TodoProject {
 
-    @JsonProperty("sync_token")
-    private String syncToken;
+    @JsonProperty("id")
+    private long id;
 
-    @JsonProperty("projects")
-    private TodoProject[] todoProjects;
+    @JsonProperty("name")
+    private String name;
 
-    @JsonProperty(value = "items", access = Access.WRITE_ONLY)
+    @JsonProperty(value = "items", access = Access.READ_ONLY)
     private TodoItem[] todoItems;
+
+    public void setItems(List<TodoItem> itemsList) {
+        todoItems = itemsList.toArray(new TodoItem[itemsList.size()]);
+    }
 }
