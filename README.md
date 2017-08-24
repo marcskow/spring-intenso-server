@@ -13,3 +13,5 @@ another server just to train, and also apply here as much interesting stuff as I
 0.3.0 Authentication. In 0.3 just basic authentication
 
 0.3.1 Authentication. Add rules and fix some problems.
+
+0.3.2 Authentication. HTTPS.

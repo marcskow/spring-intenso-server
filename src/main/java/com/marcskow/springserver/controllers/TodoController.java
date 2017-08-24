@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +27,17 @@ public class TodoController {
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<TodoList> getTodoList(){
         ResponseEntity<String> stringResponseEntity = todoRestService.todoRestCall();
+
+        try {
+            return new ResponseEntity<>(todoRestService.buildTodoList(stringResponseEntity.getBody()), HttpStatus.OK);
+        } catch (IOException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @RequestMapping(path = "/{token}", method = RequestMethod.GET)
+    public ResponseEntity<TodoList> getTodoListByToken(@PathVariable String token){
+        ResponseEntity<String> stringResponseEntity = todoRestService.todoRestCall(token);
 
         try {
             return new ResponseEntity<>(todoRestService.buildTodoList(stringResponseEntity.getBody()), HttpStatus.OK);
