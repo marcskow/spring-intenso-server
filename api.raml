@@ -1,0 +1,221 @@
+#%RAML 1.0
+title: Intenso Server api
+version: v1.0
+
+baseUri: https://localhost
+securitySchemes:
+  basicHttp:
+    type: Basic Authentication
+    description: Just Basic HTTP Authentication
+
+/api/user:
+  get:
+    securedBy: [ basicHttp: { scopes: [ ADMINISTRATOR ] } ]
+    description: Get list of existing users
+    responses:
+      201:
+        body:
+          application/json:
+            example: |
+                [
+                  {
+                    "id": "5999b910ab5a302",
+                    "username": "harryp",
+                    "firstName": "Harry",
+                    "lastName": "Potter",
+                    "email": "harry@potter.com"
+                  },
+                  {
+                    "id": "4999aaf3ab5a313",
+                    "username": "testu",
+                    "firstName": "Test",
+                    "lastName": "User",
+                    "email": "test@user.com"
+                  },
+                ]
+      404:
+        description: Not found
+  post:
+    securedBy: [ basicHttp: { scopes: [ ADMINISTRATOR ] } ]
+    description: Creating new user
+    body:
+      application/json:
+        example: |
+          {
+            "username": "harryp",
+            "firstName": "Harry",
+            "lastName": "Potter",
+            "password": "password",
+            "matchingPassword": "password",
+            "email": "harry@potter.com"
+          },
+    responses:
+      201:
+        body:
+          application/json:
+            example: |
+                {
+                  "id": "5999b910ab5a302",
+                  "username": "harryp",
+                  "firstName": "Harry",
+                  "lastName": "Potter",
+                  "email": "harry@potter.com"
+                }
+  put:
+    securedBy: [ basicHttp: { scopes: [ ADMINISTRATOR ] } ]
+    description: Update user information
+    body:
+      application/json:
+        example: |
+          {
+            "id": "5999b910ab5a302",
+            "username": "harryp",
+            "firstName": "Tony",
+            "lastName": "Potter",
+            "password": "password",
+            "matchingPassword": "password",
+            "email": "harry@potter.com"
+          },
+    responses:
+      201:
+        body:
+          application/json:
+            example: |
+                {
+                  "id": "5999b910ab5a302",
+                  "username": "harryp",
+                  "firstName": "Tony",
+                  "lastName": "Potter",
+                  "email": "harry@potter.com"
+                }
+      404:
+        description: Not found
+
+
+/api/user/{username}:
+  get:
+    securedBy: [ basicHttp: { scopes: [ ADMINISTRATOR ] } ]
+    description: Get user information by username
+    responses:
+      201:
+        body:
+          application/json:
+            example: |
+                {
+                  "id": "5999b910ab5a302",
+                  "username": "harryp",
+                  "firstName": "Harry",
+                  "lastName": "Potter",
+                  "email": "harry@potter.com"
+                },
+      404:
+        description: Not found
+  delete:
+    securedBy: [ basicHttp: { scopes: [ ADMINISTRATOR ] } ]
+    description: Delete user by username
+      201:
+        description: Ok
+      404:
+        description: Not found
+
+/api/tasks:
+  get:
+    securedBy: [ basicHttp: { scopes: [ USER ] } ]
+    description: Get all tasks
+    responses:
+      201:
+        body:
+          application/json:
+            example: |
+              [
+                {
+                  "id": "5999b910ab5a302",
+                  "title": "Clean up room",
+                  "description": "Any description",
+                  "deadline": "11.03.2018r.",
+                  "addedDate": "20.08.2017r.",
+                  "finished": false
+                }
+              ]
+      404:
+        description: Not found
+  post:
+    securedBy: [ basicHttp: { scopes: [ USER ] } ]
+    description: Adding new todo task
+    body:
+      application/json:
+        example: |
+          {
+            "title": "Clean up room",
+            "description": "Any description",
+            "deadline": "11.03.2018r.",
+            "finished": false
+          },
+    responses:
+      201:
+        body:
+          application/json:
+            example: |
+                {
+                  "id": "5999b910ab5a302",
+                  "title": "Clean up room",
+                  "description": "Any description",
+                  "deadline": "11.03.2018r.",
+                  "addedDate": "20.08.2017r.",
+                  "finished": false
+                }
+
+
+/api/tasks/{id}:
+  get:
+    securedBy: [ basicHttp: { scopes: [ USER ] } ]
+    description: Get task by id
+    responses:
+      201:
+        body:
+          application/json:
+            example: |
+              {
+                "id": "5999b910ab5a302",
+                "title": "Clean up room",
+                "description": "Any description",
+                "deadline": "11.03.2018r.",
+                "addedDate": "20.08.2017r.",
+                "finished": false
+              }
+      404:
+        description: Not found
+  put:
+    securedBy: [ basicHttp: { scopes: [ USER ] } ]
+    description: Updating task
+    body:
+      application/json:
+        example: |
+          {
+            "title": "Clean up room",
+            "description": "New description",
+            "deadline": "13.03.2018r.",
+            "finished": false
+          },
+    responses:
+      201:
+        body:
+          application/json:
+            example: |
+                {
+                  "id": "5999b910ab5a302",
+                  "title": "Clean up room",
+                  "description": "New description",
+                  "deadline": "13.03.2018r.",
+                  "addedDate": "20.08.2017r.",
+                  "finished": false
+                }
+      404:
+        description: Not found
+  delete:
+    securedBy: [ basicHttp: { scopes: [ USER ] } ]
+    description: Delete task by id
+      201:
+        description: Ok
+      404:
+        description: Not found

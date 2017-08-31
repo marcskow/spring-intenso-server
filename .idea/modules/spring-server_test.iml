@@ -13,7 +13,6 @@
     <orderEntry type="library" name="Gradle: org.projectlombok:lombok:1.16.8" level="project" />
     <orderEntry type="library" name="Gradle: ch.qos.logback:logback-classic:1.1.6" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.18" level="project" />
-    <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-actuator:1.4.2.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-data-rest:1.4.2.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-data-mongodb:1.4.2.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-security:1.4.2.RELEASE" level="project" />
@@ -22,7 +21,6 @@
     <orderEntry type="library" name="Gradle: junit:junit:4.12" level="project" />
     <orderEntry type="library" name="Gradle: ch.qos.logback:logback-core:1.1.7" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter:1.4.2.RELEASE" level="project" />
-    <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-actuator:1.4.2.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-web:1.4.2.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.8.4" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.8.4" level="project" />
