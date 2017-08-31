@@ -1,6 +1,7 @@
 package com.marcskow.springserver.controllers;
 
 import com.marcskow.springserver.model.Task;
+import com.marcskow.springserver.model.TaskResolve;
 import com.marcskow.springserver.repositories.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -60,11 +61,23 @@ public class TaskController {
         }
     }
 
-
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteTask(@PathVariable("id") String id) {
         if(taskRepository.findOneById(id) != null) {
             taskRepository.delete(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @RequestMapping(path = "/resolve", method = RequestMethod.POST)
+    public ResponseEntity<?> resolveTask(@RequestBody TaskResolve taskResolve) {
+        Optional<Task> taskOptional = taskRepository.findOneById(taskResolve.getId());
+        if(taskOptional.isPresent()) {
+            Task task = taskOptional.get();
+            task.setFinished(taskResolve.isResolved());
+            taskRepository.insert(task);
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

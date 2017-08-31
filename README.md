@@ -20,3 +20,7 @@ another server just to train, and also apply here as much interesting stuff as I
 Even if these requests needed authentication.
 
 0.3.B.1 Todo refactoring to support items in project
+
+0.4.0 Added tasks controller. 
+
+0.4.1 Tasks controller refactoring, added method for tasks resolving

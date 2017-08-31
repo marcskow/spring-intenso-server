@@ -118,7 +118,7 @@ securitySchemes:
       404:
         description: Not found
 
-/api/tasks:
+/api/task:
   get:
     securedBy: [ basicHttp: { scopes: [ USER ] } ]
     description: Get all tasks
@@ -166,7 +166,7 @@ securitySchemes:
                 }
 
 
-/api/tasks/{id}:
+/api/task/{id}:
   get:
     securedBy: [ basicHttp: { scopes: [ USER ] } ]
     description: Get task by id
@@ -219,3 +219,20 @@ securitySchemes:
         description: Ok
       404:
         description: Not found
+
+/api/task/resolve:
+post:
+  securedBy: [ basicHttp: { scopes: [ USER ] } ]
+  description: Resolving existing task
+  body:
+    application/json:
+      example: |
+        {
+          "id": "5999b910ab5a302",
+          "resolved": true
+        },
+  responses:
+    201:
+      description: Ok
+    404:
+      description: Not found
