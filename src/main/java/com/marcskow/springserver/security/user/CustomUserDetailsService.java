@@ -1,4 +1,4 @@
-package com.marcskow.springserver.services;
+package com.marcskow.springserver.security.user;
 
 import com.marcskow.springserver.model.UserModel;
 import com.marcskow.springserver.repositories.UserModelRepository;
